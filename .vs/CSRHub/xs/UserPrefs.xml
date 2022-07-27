@@ -1,0 +1,36 @@
+﻿<Properties StartupConfiguration="{5242E12B-87ED-49B1-BE7B-D53AA47407E0}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="WebAPI/appsettings.json">
+    <Files>
+      <File FileName="Entities/RepoContext.cs" Line="19" Column="13" />
+      <File FileName="Entities/Models/Employee.cs" Line="18" Column="38" />
+      <File FileName="Entities/Models/Project.cs" Line="6" Column="6" />
+      <File FileName="WebAPI/Extensions/SeviceExtensions.cs" Line="1" Column="1" />
+      <File FileName="WebAPI/appsettings.json" Line="10" Column="108" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="CSRHub" expanded="True">
+            <Node name="Entities" expanded="True">
+              <Node name="Models" expanded="True" />
+            </Node>
+            <Node name="WebAPI" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Extensions" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.WebAPI PreferredExecutionTarget="/Applications/Chrome.app" />
+</Properties>

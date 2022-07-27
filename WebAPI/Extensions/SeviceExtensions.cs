@@ -31,8 +31,7 @@ namespace WebAPI.Extentions
 
         public static void ConfigurePostgres(this IServiceCollection services,
             IConfiguration configuration) =>
-            services.AddDbContext<RepoContext>(o => o.UseNpgsql(configuration.GetConnectionString("postgres"),
-                o => o.SetPostgresVersion(new Version(9, 6))));
+            services.AddDbContext<RepoContext>(o => o.UseNpgsql(configuration.GetConnectionString("postgres")));
 
         public static void ConfigureRepositoryManager(this IServiceCollection services) =>
             services.AddScoped<IRepoManager, RepoManager>();

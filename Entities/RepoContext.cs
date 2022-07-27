@@ -10,16 +10,20 @@ namespace Entities
         public RepoContext(DbContextOptions options) : base(options)
         {
         }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder); // New for JWT
 
-            builder.ApplyConfiguration(new CompanyConfig());
-            builder.ApplyConfiguration(new EmployeeConfig());
+            //builder.ApplyConfiguration(new CompanyConfig());
+            //builder.ApplyConfiguration(new EmployeeConfig());
             builder.ApplyConfiguration(new RoleConfiguration());
         }
-        public DbSet<Company> Companies { get; set; }
-        public DbSet<Employee> Employees { get; set; }
+        //public DbSet<Company> Companies { get; set; }
+        //public DbSet<Employee> Employees { get; set; }
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<Sponsor> Sponsors { get; set; }
+        public DbSet<Organization> Organizations { get; set; }
     }
 }
 
