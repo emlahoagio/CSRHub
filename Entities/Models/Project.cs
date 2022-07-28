@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Entities.Models
+﻿namespace Entities.Models
 {
     public class Project
     {
@@ -14,13 +12,10 @@ namespace Entities.Models
         public DateTime CreateDate { get; set; }
         public bool isApprove { get; set; }
 
-        public Organization Organization { get; set; }
-        [ForeignKey(nameof(Organization))]
-        public Guid OrgId { get; set; }
+        public ICollection<Investment> Investments { get; set; }
 
-        public Sponsor Sponsor { get; set; }
-        [ForeignKey(nameof(Sponsor))]
-        public Guid? SponsorId { get; set; }
+        public Guid OrgId { get; set; }
+        public Organization Organization { get; set; }
     }
 }
 

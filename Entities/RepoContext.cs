@@ -18,12 +18,15 @@ namespace Entities
             //builder.ApplyConfiguration(new CompanyConfig());
             //builder.ApplyConfiguration(new EmployeeConfig());
             builder.ApplyConfiguration(new RoleConfiguration());
+
+            builder.Entity<Investment>().HasKey(i => new { i.SponsorId, i.ProjectId });
         }
         //public DbSet<Company> Companies { get; set; }
         //public DbSet<Employee> Employees { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Sponsor> Sponsors { get; set; }
         public DbSet<Organization> Organizations { get; set; }
+        public DbSet<Investment> Investments { get; set; }
     }
 }
 

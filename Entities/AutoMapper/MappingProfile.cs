@@ -23,6 +23,8 @@ namespace Entities.AutoMapper
             CreateMap<CompanyForUpdateDto, Company>();
 
             CreateMap<UserForRegistrationDto, User>();
+
+            CreateMap<OrgForCreationDto, Organization>();
         }
     }
 }

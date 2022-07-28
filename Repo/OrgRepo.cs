@@ -1,6 +1,7 @@
 ﻿using Contracts;
 using Entities;
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Repo
 {
@@ -10,20 +11,16 @@ namespace Repo
         {
         }
 
-        public void CreateOrganization(Organization org)
-        {
-            throw new NotImplementedException();
-        }
+        public void CreateOrganization(Organization org) => Create(org);
 
-        public Task<IEnumerable<Organization>> GetAllOrganizations(bool trackChanges)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<IEnumerable<Organization>> GetAllOrganizations(bool trackChanges) =>
+            await FindAll(trackChanges)
+            .OrderBy(o => o.Name)
+            .ToListAsync();
 
-        public Task<Organization> GetOrganization(Guid orgId, bool trackChanges)
-        {
-            throw new NotImplementedException();
-        }
+        public async Task<Organization> GetOrganization(Guid orgId, bool trackChanges) =>
+            await FindByCondition(o => o.Id.Equals(orgId), trackChanges)
+            .SingleOrDefaultAsync();
     }
 }
 

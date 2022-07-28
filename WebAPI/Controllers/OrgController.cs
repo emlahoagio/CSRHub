@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Contracts;
 using Entities.DataTransferObjects;
 using Entities.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -71,7 +66,7 @@ namespace WebAPI.Controllers
             _repo.Organization.CreateOrganization(orgEntity);
             await _repo.SaveAsync();
 
-            var orgToReturn = _mapper.Map<CompanyDto>(orgEntity);
+            var orgToReturn = _mapper.Map<Organization>(orgEntity);
 
             return CreatedAtRoute("OrganizationById", new { id = orgToReturn.Id }, orgToReturn);
         }

@@ -1,4 +1,6 @@
 ﻿<Properties StartupConfiguration="{5242E12B-87ED-49B1-BE7B-D53AA47407E0}|Default">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="WebAPI/appsettings.json">
     <Files>
       <File FileName="Entities/RepoContext.cs" Line="19" Column="13" />
@@ -10,7 +12,7 @@
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="CSRHub" expanded="True">
+          <Node name="CSRHub" expanded="True" selected="True">
             <Node name="Entities" expanded="True">
               <Node name="Models" expanded="True" />
             </Node>
@@ -26,11 +28,9 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.WebAPI PreferredExecutionTarget="/Applications/Chrome.app" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.WebAPI PreferredExecutionTarget="/Applications/Chrome.app" />
 </Properties>

@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Entities.Migrations
 {
     [DbContext(typeof(RepoContext))]
-    [Migration("20220727082222_AddedCSRTable")]
-    partial class AddedCSRTable
+    [Migration("20220728052320_AddedCSREntities")]
+    partial class AddedCSREntities
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,21 @@ namespace Entities.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("Entities.Models.Investment", b =>
+                {
+                    b.Property<Guid>("SponsorId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ProjectId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("SponsorId", "ProjectId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("Investments");
+                });
 
             modelBuilder.Entity("Entities.Models.Organization", b =>
                 {
@@ -82,8 +97,7 @@ namespace Entities.Migrations
                     b.Property<Guid>("OrgId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("SponsorId")
-                        .IsRequired()
+                    b.Property<Guid>("OrganizationId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Tag")
@@ -95,9 +109,7 @@ namespace Entities.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrgId");
-
-                    b.HasIndex("SponsorId");
+                    b.HasIndex("OrganizationId");
 
                     b.ToTable("Projects");
                 });
@@ -229,15 +241,15 @@ namespace Entities.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "aa846f4c-b10d-4387-9077-b40d8fd2f1f5",
-                            ConcurrencyStamp = "e481df4f-fbad-4a74-acee-34d3696dc148",
+                            Id = "6f49a1db-16fc-479d-b316-b8bf9a2e41e7",
+                            ConcurrencyStamp = "8fcb6ed2-b7e9-4a47-bf31-9bdc50b5813b",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
-                            Id = "ea02c635-aef6-43d9-ade1-5b4f202e2be3",
-                            ConcurrencyStamp = "77b4626a-3e98-4ef0-9f23-774add30f7f7",
+                            Id = "1039770c-2770-4f49-8764-7c312a4e684a",
+                            ConcurrencyStamp = "108cfb33-48a8-46d2-8f18-602656247c11",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -349,23 +361,34 @@ namespace Entities.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Entities.Models.Project", b =>
+            modelBuilder.Entity("Entities.Models.Investment", b =>
                 {
-                    b.HasOne("Entities.Models.Organization", "Organization")
-                        .WithMany("Projects")
-                        .HasForeignKey("OrgId")
+                    b.HasOne("Entities.Models.Project", "Project")
+                        .WithMany("Investments")
+                        .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Entities.Models.Sponsor", "Sponsor")
-                        .WithMany("Projects")
+                        .WithMany("Investments")
                         .HasForeignKey("SponsorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Organization");
+                    b.Navigation("Project");
 
                     b.Navigation("Sponsor");
+                });
+
+            modelBuilder.Entity("Entities.Models.Project", b =>
+                {
+                    b.HasOne("Entities.Models.Organization", "Organization")
+                        .WithMany("Projects")
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Organization");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -424,9 +447,14 @@ namespace Entities.Migrations
                     b.Navigation("Projects");
                 });
 
+            modelBuilder.Entity("Entities.Models.Project", b =>
+                {
+                    b.Navigation("Investments");
+                });
+
             modelBuilder.Entity("Entities.Models.Sponsor", b =>
                 {
-                    b.Navigation("Projects");
+                    b.Navigation("Investments");
                 });
 #pragma warning restore 612, 618
         }
