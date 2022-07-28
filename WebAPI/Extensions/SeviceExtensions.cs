@@ -31,7 +31,7 @@ namespace WebAPI.Extentions
 
         public static void ConfigurePostgres(this IServiceCollection services,
             IConfiguration configuration) =>
-            services.AddDbContext<RepoContext>(o => o.UseNpgsql(configuration.GetConnectionString("postgres")));
+            services.AddDbContext<RepoContext>(o => o.UseNpgsql(configuration.GetConnectionString("heroku")));
 
         public static void ConfigureRepositoryManager(this IServiceCollection services) =>
             services.AddScoped<IRepoManager, RepoManager>();
