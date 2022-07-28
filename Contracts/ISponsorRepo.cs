@@ -7,6 +7,8 @@ namespace Contracts
         Task<IEnumerable<Sponsor>> GetAllSponsors(bool trackChanges);
         Task<Sponsor> GetSponsor(Guid sponsorId, bool trackChanges);
         void CreateSponsor(Sponsor sponsor);
+        void DeleteSponsor(Sponsor sponsor);
+        void UpdateSponsor(Sponsor sponsor);
     }
 }
 

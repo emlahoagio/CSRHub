@@ -13,6 +13,8 @@ namespace Repo
 
         public void CreateOrganization(Organization org) => Create(org);
 
+        public void DeleteOrganization(Organization org) => Delete(org);
+
         public async Task<IEnumerable<Organization>> GetAllOrganizations(bool trackChanges) =>
             await FindAll(trackChanges)
             .OrderBy(o => o.Name)
@@ -21,6 +23,8 @@ namespace Repo
         public async Task<Organization> GetOrganization(Guid orgId, bool trackChanges) =>
             await FindByCondition(o => o.Id.Equals(orgId), trackChanges)
             .SingleOrDefaultAsync();
+
+        public void UpdateOrganization(Organization org) => Update(org);
     }
 }
 

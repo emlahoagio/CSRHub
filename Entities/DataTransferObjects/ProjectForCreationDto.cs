@@ -7,7 +7,6 @@
         public string Tag { get; set; }
         public string Location { get; set; }
         public string Category { get; set; }
-        public DateTime EndDate { get; set; }
     }
 }
 

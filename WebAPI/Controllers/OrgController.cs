@@ -70,5 +70,36 @@ namespace WebAPI.Controllers
 
             return CreatedAtRoute("OrganizationById", new { id = orgToReturn.Id }, orgToReturn);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteOrganization(Guid id)
+        {
+            var organization = await _repo.Organization.GetOrganization(id, trackChanges: false);
+            if (organization == null)
+            {
+                _logger.LogInfo($"organization with id: {id} doesn't exist in the database.");
+                return NotFound();
+            }
+
+            _repo.Organization.DeleteOrganization(organization);
+            await _repo.SaveAsync();
+
+            return NoContent();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateOrganization(Organization org)
+        {
+            var organization = await _repo.Organization.GetOrganization(org.Id, trackChanges: false);
+            if (organization == null)
+            {
+                _logger.LogInfo($"organization with id: {org.Id} doesn't exist in the database.");
+                return NotFound();
+            }
+            _repo.Organization.UpdateOrganization(org);
+            await _repo.SaveAsync();
+
+            return NoContent();
+        }
     }
 }

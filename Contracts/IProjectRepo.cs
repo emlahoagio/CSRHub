@@ -4,9 +4,11 @@ namespace Contracts
 {
     public interface IProjectRepo
     {
-        Task<IEnumerable<Project>> GetAllProjects(bool trackChanges);
-        Task<Project> GetProject(Guid projectId, bool trackChanges);
-        void CreateProject(Project project);
+        Task<IEnumerable<Project>> GetProjectsAsync(Guid organizationId, bool trackChanges);
+        Task<Project> GetProject(Guid orgId, Guid projectId, bool trackChanges);
+        void CreateProjectForOrganization(Guid organizationId, Project project);
+        void DeleteProject(Project project);
+        void UpdateProject(Project project);
     }
 }
 

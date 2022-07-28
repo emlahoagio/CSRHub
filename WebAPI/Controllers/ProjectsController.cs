@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Contracts;
 using Entities.DataTransferObjects;
-using Microsoft.AspNetCore.Http;
+using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -26,25 +22,29 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetProjects()
+        public async Task<IActionResult> GetProjectsForOrganization(Guid orgId)
         {
-            try
+            var org = _repo.Organization.GetOrganization(orgId, trackChanges: false);
+            if (org == null)
             {
-                var projects = await _repo.Project.GetAllProjects(trackChanges: false);
-                //var companiesDto = _mapper.Map<IEnumerable<CompanyDto>>(companies);
-                return Ok(projects);
+                _logger.LogInfo($"Organization with id: {orgId} doesn't exist in the database.");
+                return NotFound();
             }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Something went wrong in the {nameof(GetProjects)} action {ex}");
-                return StatusCode(500, "Internal server error");
-            }
+            var projects = await _repo.Project.GetProjectsAsync(orgId, trackChanges: false);
+            return Ok(projects);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetCompany(Guid id)
+        [HttpGet("{id}", Name = "GetProjectForOrganization")]
+        public async Task<IActionResult> GetProjectForOrganization(Guid orgId, Guid id)
         {
-            var project = await _repo.Project.GetProject(id, trackChanges: false);
+            var org = _repo.Organization.GetOrganization(orgId, trackChanges: false);
+            if (org == null)
+            {
+                _logger.LogInfo($"Organization with id: {orgId} doesn't exist in the database.");
+                return NotFound();
+            }
+
+            var project = await _repo.Project.GetProject(orgId, id, trackChanges: false);
             if (project == null)
             {
                 _logger.LogInfo($"Project with id: {id} doesn't exist in the database.");
@@ -52,27 +52,45 @@ namespace WebAPI.Controllers
             }
             else
             {
-                //var companyDto = _mapper.Map<CompanyDto>(company);
                 return Ok(project);
             }
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> CreateProject(Guid orgId, [FromBody] ProjectForCreationDto company)
-        //{
-        //    if (company == null)
-        //    {
-        //        _logger.LogError("CompanyForCreationDto object sent from client is null");
-        //        return BadRequest("CompanyForCreationDto object is null");
-        //    }
-        //    var companyEntity = _mapper.Map<Company>(company);
+        [HttpPost]
+        public async Task<IActionResult> CreateProjectForOrganization(Guid organizationId,
+            [FromBody] ProjectForCreationDto project)
+        {
+            if (project == null)
+            {
+                _logger.LogError("ProjectForCreationDto object sent from client is null.");
+                return BadRequest("ProjectForCreationDto object is null");
+            }
 
-        //    _repo.Company.CreateCompany(companyEntity);
-        //    await _repo.SaveAsync();
+            // Check model validation from (data annotation attribute)
+            if (!ModelState.IsValid)
+            {
+                _logger.LogError("Invalid model state for the ProjectForCreationDto object.");
+                return UnprocessableEntity(ModelState);
+            }
 
-        //    var companyToReturn = _mapper.Map<CompanyDto>(companyEntity);
+            var organization = await _repo.Organization.GetOrganization(organizationId, trackChanges: false);
+            if (organization == null)
+            {
+                _logger.LogInfo($"Organization with id: {organizationId} doesn't exist in the database.");
+                return NotFound();
+            }
 
-        //    return CreatedAtRoute("CompanyById", new { id = companyToReturn.Id }, companyToReturn);
-        //}
+            var projectEntity = _mapper.Map<Project>(project);
+
+            _repo.Project.CreateProjectForOrganization(organizationId, projectEntity);
+            await _repo.SaveAsync();
+
+            var projectToReturn = _mapper.Map<Project>(projectEntity);
+            return CreatedAtRoute("GetProjectForOrganization", new
+            {
+                organizationId,
+                id = projectToReturn.Id
+            }, projectToReturn);
+        }
     }
 }

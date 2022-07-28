@@ -8,13 +8,11 @@
         public string Tag { get; set; }
         public string Location { get; set; }
         public string Category { get; set; }
-        public DateTime EndDate { get; set; }
-        public DateTime CreateDate { get; set; }
         public bool isApprove { get; set; }
 
         public ICollection<Investment> Investments { get; set; }
 
-        public Guid OrgId { get; set; }
+        public Guid OrganizationId { get; set; }
         public Organization Organization { get; set; }
     }
 }

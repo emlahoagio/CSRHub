@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Entities.Migrations
 {
-    public partial class AddedCSREntities : Migration
+    public partial class Initcsrdb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -197,10 +197,7 @@ namespace Entities.Migrations
                     Tag = table.Column<string>(type: "text", nullable: false),
                     Location = table.Column<string>(type: "text", nullable: false),
                     Category = table.Column<string>(type: "text", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     isApprove = table.Column<bool>(type: "boolean", nullable: false),
-                    OrgId = table.Column<Guid>(type: "uuid", nullable: false),
                     OrganizationId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
@@ -243,8 +240,8 @@ namespace Entities.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1039770c-2770-4f49-8764-7c312a4e684a", "108cfb33-48a8-46d2-8f18-602656247c11", "Administrator", "ADMINISTRATOR" },
-                    { "6f49a1db-16fc-479d-b316-b8bf9a2e41e7", "8fcb6ed2-b7e9-4a47-bf31-9bdc50b5813b", "Manager", "MANAGER" }
+                    { "21a93892-3e86-49be-baaf-3b6314a189ed", "17b3ffc0-24f6-4543-9afb-5092169634ac", "Administrator", "ADMINISTRATOR" },
+                    { "5784d873-00ad-4307-a5bd-0a7d9a8eb351", "be3844d6-0b75-4a2b-8741-8a79b1a5c895", "Manager", "MANAGER" }
                 });
 
             migrationBuilder.CreateIndex(

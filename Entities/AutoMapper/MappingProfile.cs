@@ -25,6 +25,12 @@ namespace Entities.AutoMapper
             CreateMap<UserForRegistrationDto, User>();
 
             CreateMap<OrgForCreationDto, Organization>();
+
+            CreateMap<SponsorForCreationDto, Sponsor>();
+
+            CreateMap<ProjectForCreationDto, Project>()
+                .ForMember(p => p.isApprove,
+                opt => opt.MapFrom(x => true));
         }
     }
 }

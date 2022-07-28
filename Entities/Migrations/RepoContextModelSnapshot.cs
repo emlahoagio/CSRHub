@@ -74,12 +74,6 @@ namespace Entities.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<string>("Image")
                         .IsRequired()
                         .HasColumnType("text");
@@ -91,9 +85,6 @@ namespace Entities.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<Guid>("OrgId")
-                        .HasColumnType("uuid");
 
                     b.Property<Guid>("OrganizationId")
                         .HasColumnType("uuid");
@@ -239,15 +230,15 @@ namespace Entities.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6f49a1db-16fc-479d-b316-b8bf9a2e41e7",
-                            ConcurrencyStamp = "8fcb6ed2-b7e9-4a47-bf31-9bdc50b5813b",
+                            Id = "5784d873-00ad-4307-a5bd-0a7d9a8eb351",
+                            ConcurrencyStamp = "be3844d6-0b75-4a2b-8741-8a79b1a5c895",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
-                            Id = "1039770c-2770-4f49-8764-7c312a4e684a",
-                            ConcurrencyStamp = "108cfb33-48a8-46d2-8f18-602656247c11",
+                            Id = "21a93892-3e86-49be-baaf-3b6314a189ed",
+                            ConcurrencyStamp = "17b3ffc0-24f6-4543-9afb-5092169634ac",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
