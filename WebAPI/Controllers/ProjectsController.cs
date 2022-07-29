@@ -24,7 +24,7 @@ namespace WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetProjectsForOrganization(Guid orgId)
         {
-            var org = _repo.Organization.GetOrganization(orgId, trackChanges: false);
+            var org = await _repo.Organization.GetOrganization(orgId, trackChanges: false);
             if (org == null)
             {
                 _logger.LogInfo($"Organization with id: {orgId} doesn't exist in the database.");

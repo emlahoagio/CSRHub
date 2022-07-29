@@ -22,8 +22,18 @@ namespace Repo
         public async Task<IEnumerable<Project>> GetProjectsAsync(Guid organizationId, bool trackChanges)
         {
             var projects = await FindByCondition(p => p.OrganizationId.Equals(organizationId), trackChanges)
-                .OrderBy(p => p.Name)
                 .ToListAsync();
+            //var result = projects.Select(x => new Project
+            //{
+            //    Id = x.Id,
+            //    Category = x.Category,
+            //    Image = x.Image,
+            //    isApprove = x.isApprove,
+            //    Location = x.Location,
+            //    Name = x.Name,
+            //    OrganizationId = x.OrganizationId,
+            //    Tag = x.Tag,
+            //}).ToList();
             return projects;
         }
 
