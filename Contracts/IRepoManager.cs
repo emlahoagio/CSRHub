@@ -7,6 +7,7 @@
         ISponsorRepo Sponsor { get;}
         IOrgRepo Organization { get; }
         IProjectRepo Project { get; }
+        IInvestmentRepo Investment { get; }
         Task SaveAsync();
     }
 }

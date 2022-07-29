@@ -31,6 +31,8 @@ namespace Entities.AutoMapper
             CreateMap<ProjectForCreationDto, Project>()
                 .ForMember(p => p.isApprove,
                 opt => opt.MapFrom(x => true));
+
+            CreateMap<InvestmentForCreationDto, Investment>();
         }
     }
 }

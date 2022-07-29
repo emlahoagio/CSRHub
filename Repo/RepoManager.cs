@@ -12,6 +12,7 @@ namespace Repo
         private IProjectRepo _projectRepo;
         private IOrgRepo _orgRepo;
         private ISponsorRepo _sponsorRepo;
+        private IInvestmentRepo _investmentRepo;
         public RepoManager(RepoContext context)
         {
             _context = context;
@@ -64,6 +65,16 @@ namespace Repo
                 if (_sponsorRepo == null)
                     _sponsorRepo = new SponsorRepo(_context);
                 return _sponsorRepo;
+            }
+        }
+
+        public IInvestmentRepo Investment
+        {
+            get
+            {
+                if (_investmentRepo == null)
+                    _investmentRepo = new InvestmentRepo(_context);
+                return _investmentRepo;
             }
         }
 
